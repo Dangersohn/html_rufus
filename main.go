@@ -40,7 +40,7 @@ func showChoice(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Print(err)
 	}
-	t.ExecuteTemplate(w, "test", p)
+	t.ExecuteTemplate(w, "content", p)
 }
 
 func api(w http.ResponseWriter, r *http.Request) {

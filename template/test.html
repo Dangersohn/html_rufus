@@ -1,9 +1,38 @@
-{{define "test"}}
+{{define "header"}}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <title></title>
+
+</head>
+<body>
+<div class="container-fluid">
+{{end}}
+
+{{define "content"}}
+{{ template "header"}}
 <html>
-<div>{{.Text}}</div>    
+<div>{{.Text}}</div>   
+
+
 <form action="/api" method="POST">
-    <button type="submit" name="choice" value="1">{{index .Choices 0}}</button>
-    <button type="submit" name="choice" value="2">{{index .Choices 1}}</button>
+<div class="row">
+    <div class="col-sm-3 offset-sm-3 text-center"><button class="btn btn-primary" type="submit" name="choice" value="1">{{index .Choices 0}}</button></div>
+    <div class="col-sm-3 text-center"><button class="btn btn-primary" type="submit" name="choice" value="2">{{index .Choices 1}}</button></div>
+</div>
 </form>
+
+</html>
+{{ template "footer"}}
+{{end}}
+
+{{define "footer"}}
+</div>
+</body>
 </html>
 {{end}}
