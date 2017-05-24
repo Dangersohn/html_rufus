@@ -5,7 +5,7 @@ text: |
   von Quellen, bei einem der Festgenommenen handele es sich um den Bruder des Selbstmordattentäters Salman Abedi.
 choices:
   - Choice1.1
-  - Choice1.1
+  - Choice1.2
 id:
-  - choice2
-  - choice2
+  - choice1.1
+  - choice1.2

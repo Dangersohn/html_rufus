@@ -14,6 +14,7 @@ type Page struct {
 	Titel   string
 	Text    string
 	Choices []string
+	ID      []string
 }
 
 func loadPage(title string) (Page, error) {
@@ -27,12 +28,13 @@ func loadPage(title string) (Page, error) {
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}
-
+	fmt.Print(p.ID)
 	return *p, nil
 }
 
 func showChoice(w http.ResponseWriter, r *http.Request) {
-	p, err := loadPage("choice1.1")
+
+	p, err := loadPage("choice1")
 	if err != nil {
 		fmt.Print(err)
 	}
@@ -40,22 +42,18 @@ func showChoice(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Print(err)
 	}
+	fmt.Print(r.URL)
 	t.ExecuteTemplate(w, "content", p)
 }
 
 func api(w http.ResponseWriter, r *http.Request) {
 	choice := r.FormValue("choice")
-	if choice == "1" {
-		fmt.Fprint(w, "Hat aus 1 gewählt")
-	}
-	if choice == "2" {
-		fmt.Fprint(w, "Hat aus 2 gewählt")
-	}
-
+	fmt.Println(choice)
+	http.Redirect(w, r, "/main"+"?q="+choice, http.StatusFound)
 }
 
 func main() {
-	http.HandleFunc("/test", showChoice)
+	http.HandleFunc("/main", showChoice)
 	http.HandleFunc("/api", api)
 	http.ListenAndServe(":8080", nil)
 }

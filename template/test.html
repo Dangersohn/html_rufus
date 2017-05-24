@@ -32,7 +32,7 @@
       <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
     </div>
     <div class="card-footer"><form action="/api" method="POST">
-    <button class="btn btn-primary" type="submit" name="choice" value="1">{{index .Choices 0}}</button> 
+    <button class="btn btn-primary" type="submit" name="choice" value="{{index .ID 0}}">{{index .Choices 0}}</button> 
     </form>
     </div>
   </div>
@@ -44,7 +44,7 @@
       <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
     </div>
     <div class="card-footer"><form action="/api" method="POST">
-    <button class="btn btn-primary" type="submit" name="choice" value="1">{{index .Choices 1}}</button> 
+    <button class="btn btn-primary" type="submit" name="choice" value="{{index .ID 1}}">{{index .Choices 1}}</button> 
     </form>
     </div>
   </div>
