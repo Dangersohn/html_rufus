@@ -4,31 +4,54 @@ import (
 	"fmt"
 	"html/template"
 	"io/ioutil"
+	"log"
 	"net/http"
+
+	"gopkg.in/yaml.v2"
 )
 
 type Page struct {
-	Titel string
-	Text  []byte
+	Titel   string
+	Text    string
+	Choices []string
 }
 
-func loadPage(title string) (*Page, error) {
-	filename := title + ".txt"
+func loadPage(title string) (Page, error) {
+	p := &Page{Titel: title}
+	filename := title + ".yaml"
 	text, err := ioutil.ReadFile(filename)
 	if err != nil {
-		return nil, err
+		return *p, err
 	}
-	return &Page{Titel: title, Text: text}, nil
+	err = yaml.Unmarshal(text, &p)
+	if err != nil {
+		log.Fatalf("error: %v", err)
+	}
+
+	return *p, nil
 }
 
 func showChoice(w http.ResponseWriter, r *http.Request) {
-	p, _ := loadPage("choice1.1")
-	t, _ := template.ParseGlob("template/*.html")
-	t.ExecuteTemplate(w, string(p.Text), r.RequestURI)
+	p, err := loadPage("choice1.1")
+	if err != nil {
+		fmt.Print(err)
+	}
+	t, err := template.ParseGlob("template/*.html")
+	if err != nil {
+		fmt.Print(err)
+	}
+	t.ExecuteTemplate(w, "test", p)
 }
 
 func api(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, r.FormValue("choice"))
+	choice := r.FormValue("choice")
+	if choice == "1" {
+		fmt.Fprint(w, "Hat aus 1 gewählt")
+	}
+	if choice == "2" {
+		fmt.Fprint(w, "Hat aus 2 gewählt")
+	}
+
 }
 
 func main() {
