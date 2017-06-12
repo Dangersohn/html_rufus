@@ -7,6 +7,8 @@ import (
 	"log"
 	"net/http"
 
+	"regexp"
+
 	"gopkg.in/yaml.v2"
 )
 
@@ -28,13 +30,15 @@ func loadPage(title string) (Page, error) {
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}
-	fmt.Print(p.ID)
+	//	fmt.Print(p.ID)
 	return *p, nil
 }
 
 func showChoice(w http.ResponseWriter, r *http.Request) {
-
-	p, err := loadPage("choice1")
+	var re = regexp.MustCompile(`[^=]+$`)
+	test := r.URL.RawQuery // Schneidet das Query aus
+	match := re.FindAllString(test, 1)
+	p, err := loadPage(match[0])
 	if err != nil {
 		fmt.Print(err)
 	}
@@ -42,7 +46,8 @@ func showChoice(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Print(err)
 	}
-	fmt.Print(r.URL)
+	//fmt.Print(r.URL)
+
 	t.ExecuteTemplate(w, "content", p)
 }
 

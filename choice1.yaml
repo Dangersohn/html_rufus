@@ -1,11 +1,16 @@
 text: |
-  Die britische Polizei hat im Zusammenhang mit dem Selbstmordattentat in Manchester drei weitere Personen festgenommen.
-  Die Männer seien im Süden der Stadt in Gewahrsam genommen worden, wo bereits am Dienstag ein 23-Jähriger festgenommen worden war,
-  teilte die Polizei mit. Welche Rolle die Männer bei dem Anschlag gespielt haben könnten, blieb zunächst offenDie BBC berichtet ohne Angaben
-  von Quellen, bei einem der Festgenommenen handele es sich um den Bruder des Selbstmordattentäters Salman Abedi.
+  Rufus klettert an der Dachrinne runter  und begibt sich zu einem Gullydeckel. Ihm kam ein widerlicher Gestank entgegen doch er steigt Trotzdem
+  die alter rostige leider hinab. Nach seinen Berechnungen muss er um das Hauptgebäude zu erreichen nach den  nächsten 5  Abzweigung rechts abbiegen
+  und solange gerade auslaufen bis er eine Leiter erreicht. Zum Glück hatten die Schildkröten vergessen die Gullydeckel zu verschweißen. So war es für Rufus
+  ein leichtes  den Deckel weg zuschieben.
+
+  Nun war nur die Frage ob er sich beeilen sollte und einfach aus dem Gully steigen oder erst mal Prüfen ob sich jemand in der Nähe befand.
 choices:
-  - Choice1.1
-  - Choice1.2
+  - Beeilen
+  - Prüfen
 id:
-  - choice1.1
-  - choice1.2
+  - choice1_1
+  - choice1_2
+bilder:
+  - https://www.rentcafe.com/Content/Marketing/timelapse/chicago-then-and-now/img/Chicago-skyline-from-Lake-Michigan-2006.jpg
+  - http://t00.deviantart.net/GDmmjJojf1n1ddyhAi03EcNMKKs=/300x200/filters:fixed_height(100,100):origin()/pre03/ca8b/th/pre/i/2010/279/c/0/city_of_angels_by_apollonui-d308kfn.jpg
