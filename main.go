@@ -22,7 +22,7 @@ type Page struct {
 func loadPage(title string) (Page, error) {
 	p := &Page{Titel: title}
 	filename := title + ".yaml"
-	text, err := ioutil.ReadFile(filename)
+	text, err := ioutil.ReadFile("choices/" + filename)
 	if err != nil {
 		return *p, err
 	}
@@ -36,8 +36,9 @@ func loadPage(title string) (Page, error) {
 
 func showChoice(w http.ResponseWriter, r *http.Request) {
 	var re = regexp.MustCompile(`[^=]+$`)
-	test := r.URL.RawQuery // Schneidet das Query aus
-	match := re.FindAllString(test, 1)
+	choiceQuery := r.URL.RawQuery // Schneidet das Query aus
+	match := re.FindAllString(choiceQuery, 1)
+	fmt.Print(match)
 	p, err := loadPage(match[0])
 	if err != nil {
 		fmt.Print(err)
