@@ -1,0 +1,15 @@
+text: |
+  Es war sonniger Tag der sich dem Ende näherte. Obwohl die Sonnen schon fast hinter dem Horizont verschwunden war,
+  fühlten sich die Dachschindel immer noch warm unter Rufus Bauch  an.  Er lag schon einige Zeit auf dem Dach.
+  Ihm waren die Beine eingeschlafen doch das Warten schien sich gelohnt zu haben. Am Tor der streng bewachten
+  Schnapsschildkrötenbasis fuhr ein Auto vor. Das Auto sah aus wie ein großer Schildkrötenpanzer mit Rädern.
+  Die Fenster waren verdunkelt doch Rufus wusste wer in den Auto saß. Jetzt galt es schnell zu handeln.
+  Rufus hatte sich zwei Wege in die Basis ausgespäht.
+
+  Soll Rufus durch die Kanalisation in die Basis eindringen oder mit seinem Kleinen Gleitdrachen versuchen das Hauptgebäude zu erreichen?
+choices:
+  - Kanalisation
+  - Gleitdrache
+id:
+  - choice1
+  - choice2
