@@ -24,7 +24,10 @@ func loadPage(title string) (Page, error) {
 	filename := title + ".yaml"
 	text, err := ioutil.ReadFile("choices/" + filename)
 	if err != nil {
-		return *p, err
+		text, err = ioutil.ReadFile("choices/intro.yaml")
+		if err != nil {
+			return *p, err
+		}
 	}
 	err = yaml.Unmarshal(text, &p)
 	if err != nil {
@@ -38,7 +41,6 @@ func showChoice(w http.ResponseWriter, r *http.Request) {
 	var re = regexp.MustCompile(`[^=]+$`)
 	choiceQuery := r.URL.RawQuery // Schneidet das Query aus
 	match := re.FindAllString(choiceQuery, 1)
-	fmt.Print(match)
 	p, err := loadPage(match[0])
 	if err != nil {
 		fmt.Print(err)
