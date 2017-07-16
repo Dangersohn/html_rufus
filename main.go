@@ -7,9 +7,9 @@ import (
 	"log"
 	"net/http"
 
-	"regexp"
+	yaml "gopkg.in/yaml.v2"
 
-	"gopkg.in/yaml.v2"
+	"github.com/julienschmidt/httprouter"
 )
 
 type Page struct {
@@ -37,11 +37,8 @@ func loadPage(title string) (Page, error) {
 	return *p, nil
 }
 
-func showChoice(w http.ResponseWriter, r *http.Request) {
-	var re = regexp.MustCompile(`[^=]+$`)
-	choiceQuery := r.URL.RawQuery // Schneidet das Query aus
-	match := re.FindAllString(choiceQuery, 1)
-	p, err := loadPage(match[0])
+func showChoic(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	p, err := loadPage(ps.ByName("choice"))
 	if err != nil {
 		fmt.Print(err)
 	}
@@ -54,14 +51,16 @@ func showChoice(w http.ResponseWriter, r *http.Request) {
 	t.ExecuteTemplate(w, "content", p)
 }
 
-func api(w http.ResponseWriter, r *http.Request) {
+func api(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	choice := r.FormValue("choice")
 	fmt.Println(choice)
-	http.Redirect(w, r, "/main"+"?q="+choice, http.StatusFound)
+	http.Redirect(w, r, "/main"+choice, http.StatusFound)
 }
 
 func main() {
-	http.HandleFunc("/main", showChoice)
-	http.HandleFunc("/api", api)
-	http.ListenAndServe(":8080", nil)
+	router := httprouter.New()
+	router.GET("/api", api)
+	router.GET("/main/:choice", showChoic)
+	router.NotFound = http.FileServer(http.Dir("/static/*"))
+	log.Fatal(http.ListenAndServe(":8080", router))
 }
