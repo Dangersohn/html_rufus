@@ -54,13 +54,17 @@ func showChoic(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 func api(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	choice := r.FormValue("choice")
 	fmt.Println(choice)
-	http.Redirect(w, r, "/main"+choice, http.StatusFound)
+	http.Redirect(w, r, "/main/"+choice, http.StatusFound)
+}
+
+func index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+    fmt.Fprint(w, "Welcome!\n")
 }
 
 func main() {
 	router := httprouter.New()
 	router.GET("/api", api)
 	router.GET("/main/:choice", showChoic)
-	router.NotFound = http.FileServer(http.Dir("/static/*"))
+	router.NotFound = index
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
